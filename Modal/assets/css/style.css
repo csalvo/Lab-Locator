@@ -1,0 +1,40 @@
+/*modal*/
+
+#modalNav {
+    height: 60px;
+    width: 100%;
+}
+
+#myModal {
+    display: block;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 50px;
+    height: 100%;
+}
+
+#searchBox {
+    margin: 50px;
+}
+
+#submit {
+    margin: 25px;
+}
+
+#dropDownBtn {
+    outline: none;
+    border: none;
+    background-color: white;
+}
+
+
+
+
+
+/*Main Page*/
+
+#mainPage {
+    margin: ;
+}
