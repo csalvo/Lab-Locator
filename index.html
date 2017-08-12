@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel = "stylesheet" type = "text/css" href = "assets/css/styles.css"></link>
@@ -36,29 +37,30 @@
 	</div>
 
 <!--admin modal window with search criteria-->
-<div class="modal fade" id="adminModal" role="dialog">
-   <div class="modal-dialog modal-md">
+	<div class="modal fade" id="adminModal" role="dialog">
+   	<div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header modal-content">
           <h4 class="modal-title">Enter a specific lab or list all labs</h4>
         </div>
         <div class="modal-body">
           <div class="adminAuth">
-			<form class="form-inline">
-			  <div class="form-group">
-			    <input type="text" class="form-control" id="adminEmail" placeholder="admin name">
-			  </div>
-			<div class="form-group">
-			  <input type="integer" class="form-control" id="enterPw" placeholder="password">
-		    </div>
-            <div class="modal-footer">
-          	  <button onclick="signInAdmin()" type="button" class="btn btn-default" data-dismiss="modal">Edit lab</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+						<form class="form-inline">
+						<div class="form-group">
+						  <input type="text" class="form-control" id="adminEmail" placeholder="admin email">
+						</div>
+						<div class="form-group">
+						  <input type="integer" class="form-control" id="enterPw" placeholder="password">
+					  </div>
+			      <div class="modal-footer">
+			        <button id="btnLogin" type="button" class="btn btn-default" data-dismiss="modal">Sign In</button>
+			      </div>
+			      </form>
+      		</div>
+      	</div>
+    	</div>
+  	</div>
+	</div>
 
 <!--Button for printing the modal window. This needs to become active once directions are generated.-->
 <button onclick="myFunction()">Print this page</button>
@@ -70,7 +72,7 @@ function myFunction() {
 </script>
 
 <!--send an email...-->
-<h2>Send e-mail to someone@example.com:</h2>
+<h2>E-mail these directions to someone.</h2>
 
 <form action="mailto:" method="post" enctype="text/plain">
 Name:<br>
