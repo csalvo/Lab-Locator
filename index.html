@@ -7,66 +7,58 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel = "stylesheet" type = "text/css" href = "styles.css"></link>
+    <link rel = "stylesheet" type = "text/css" href = "assets/css/styles.css"></link>
 </head>
 <body>
 <container class="labContainer">
 	
-	<row>
-		<col-sm-1>
-		</col-sm-1>
-		<col-sm-10 id="labDisplay">
+	<div class="row">
+		<div class="col-sm-1">
+		</div>
+		<div class="col-sm-10" id="labDisplay">
 			<div class="labMapImage">
 			</div>
 			<div id="labInfo">
 				<ul>
-					<li id="name">
-					</li>
-					<li id="address">
-					</li>
-					<li id="phone">
-					</li>
-					<li id="hours">
-					</li>
-					<li id="rating ">
-					</li>
+					<li id="name">name</li>
+					<li id="address">address</li>
+					<li id="phone">phone number</li>
+					<li id="hours">hours</li>
+					<li id="rating ">rating</li>
 					<button id="directions">Directions</button>
 				</ul>
 			</div>
-		</col-sm-10>
-		<col-sm-1>
-		</col-sm-1>
-	</row>
+		</div>
+		<div class="col-sm-1">
+		  <!--button for admin access-->
+          <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#adminModal">Admin</button>
+		</div>
+	</div>
 
-
-<!--button to enter address-->
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Labs close to me</button>
-
-<!--modal window with address inputs-->
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-md">
+<!--admin modal window with search criteria-->
+<div class="modal fade" id="adminModal" role="dialog">
+   <div class="modal-dialog modal-md">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Enter a starting street address and zipcode</h4>
+        <div class="modal-header modal-content">
+          <h4 class="modal-title">Enter a specific lab or list all labs</h4>
         </div>
         <div class="modal-body">
-          <div class="pointOfOrigin">
+          <div class="adminAuth">
 			<form class="form-inline">
 			  <div class="form-group">
-			    <input type="text" class="form-control" id="enterStreet" placeholder="street">
+			    <input type="text" class="form-control" id="adminEmail" placeholder="admin name">
 			  </div>
 			<div class="form-group">
-			  <input type="integer" class="form-control" id="enterZip" placeholder="zip">
+			  <input type="integer" class="form-control" id="enterPw" placeholder="password">
 		    </div>
             <div class="modal-footer">
-          	  <button type="button" class="btn btn-default" data-dismiss="modal">Find the closest labs!</button>
+          	  <button onclick="signInAdmin()" type="button" class="btn btn-default" data-dismiss="modal">Edit lab</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-
 
 <!--Button for printing the modal window. This needs to become active once directions are generated.-->
 <button onclick="myFunction()">Print this page</button>
@@ -77,7 +69,25 @@ function myFunction() {
 }
 </script>
 
+<!--send an email...-->
+<h2>Send e-mail to someone@example.com:</h2>
+
+<form action="mailto:" method="post" enctype="text/plain">
+Name:<br>
+	<input type="text" name="name"><br>
+		E-mail:<br>
+	<input type="text" name="email"><br>
+	Comment:<br>
+	<input type="text" name="comment" size="50" value="These are directions to my closest lab."><br><br>
+	<input type="submit" value="Send">
+	<input type="reset" value="Reset">
+</form>
+<br>
+
+
+
 
 </container>
+    <script src="assets/javascript/script.js"></script>
 </body>
 </html>
