@@ -17,6 +17,7 @@
 
 #searchBox {
     margin: 50px;
+    max-width: 60%;
 }
 
 #submit {
@@ -34,7 +35,3 @@
 
 
 /*Main Page*/
-
-#mainPage {
-    margin: ;
-}
