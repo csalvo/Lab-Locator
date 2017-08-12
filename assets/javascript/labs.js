@@ -1,4 +1,5 @@
-var labList = { 
+var labList = [
+{ 
 labName:"CDH Lab Patient Service Center - Amherst", 
 address: "170 University Dr.", 
 city: "Amherst", 
@@ -907,4 +908,5 @@ labAppointment: "No",
 practiceOnly: "No", 
 phone: "unknown ", 
 fax: "unknown"
-},
+}
+]
