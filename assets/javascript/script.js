@@ -18,11 +18,11 @@ var btnSignUp = $("#btnSignup");
 var btnLogout = $("#btnLogout");
 
 $("#btnLogin").click(function authAdmin(){
-  
+ 
   var email = adminEmail.val();
   var pass = password.val();
   var auth = firebase.auth();
-  firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
   var errorMessage = error.message;
@@ -30,9 +30,9 @@ $("#btnLogin").click(function authAdmin(){
 });
 
 //HERE IS WHERE I GET SERIOUSLY LOST...HOW DO YOU VERIFY NAME/PASSWORD AGAINST FIREBASE'S USER?
-  var promise = firebase.auth.onAuthStateChanged();
+  //var promise = firebase.auth.onAuthStateChanged(User);
   
-  if (promise === true) {
+  if (firebase.auth()) {
       console.log("yep");
       window.open("admin.html");
   } else {
@@ -46,6 +46,14 @@ $("#btnSignUp").click(function(){
   var pass = password.val();
   var auth = firebase.auth();
   var promise = auth.createUserWithEmailAndPassword(email, pass);
+});
+
+$("#btnLogout").click( function(){
+    firebase.auth().signOut().then(function() {
+  // Sign-out successful.
+  }).catch(function(error) {
+  // An error happened.
+  });
 });
 
 };
