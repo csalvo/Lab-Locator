@@ -29,8 +29,6 @@ $("#btnLogin").click(function authAdmin(){
   // ...
 });
 
-//HERE IS WHERE I GET SERIOUSLY LOST...HOW DO YOU VERIFY NAME/PASSWORD AGAINST FIREBASE'S USER?
-  //var promise = firebase.auth.onAuthStateChanged(User);
   
   if (firebase.auth()) {
       console.log("yep");
@@ -60,64 +58,3 @@ $("#btnLogout").click( function(){
 
 adminChanges();
 
-// var auth = firebase.auth();
-// var email = $("#adminEmail");
-// var pass = $("#enterPw");
-
-// auth.signInWithEmailAndPassword(email, pass);
-// auth.createUserWithEmailAndPassword(email, pass);
-
-// var labList = [];
-// var indivLab = [];
-
-// $("#btnLogin").click(signInAdmin(){
-// }); 
-
-
-// function () {
-//   $('#adminPage"').html(
-//   )
-// }
-
-// function listLabs() {
-//   $('#adminPage').html(
-//   )
-// };
-
-// function gotoLab () {
-
-// };
-
-// function signInAdmin() {
-  
-//   //the call to sign in  
-//   auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-  
-//           // Handle Errors here.
-//           var errorCode = error.code;
-//           var errorMessage = error.message;
-//           // [START_EXCLUDE]
-//             if (errorCode === 'auth/wrong-password') {
-//               alert('Wrong password.');
-//             } else {
-//               alert(errorMessage);
-//             }
-//               console.log(error);
-//               document.getElementById('quickstart-sign-in').disabled = false;
-//             // [END_EXCLUDE]
-//         });
-// };
-
-//       var uiConfig = {
-//         signInSuccessUrl: 'admin.html',
-//         signInOptions: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-       
-//         // Terms of service url.
-//         tosUrl: '<your-tos-url>'
-//       };
-
-//       // Initialize the FirebaseUI Widget using Firebase.
-//       var ui = new firebaseui.auth.AuthUI(firebase.auth());
-//       // The start method will wait until the DOM is loaded.
-//       ui.start('#firebaseui-auth-container', uiConfig);
-    
