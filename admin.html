@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Lab Locator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Chrome Tab Icon -->
+    <link rel="shortcut icon" href="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiz05TL8M3VAhVs74MKHfoWA-sQjRwIBw&url=https%3A%2F%2Fwww.flaticon.com%2Ffree-icons%2Ferlenmeyer-flask_168574&psig=AFQjCNFaVWYxLyvvrL2MGOSaGXE2wHvlaw&ust=1502496174912419" />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Main Page -->
+    <div id="mainPage">
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img src="assets/images/lab_locator_logo_1024.jpg" height="40"></a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in .align-bottom"></span> Admin Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+	<div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Labs</strong></h3>
+            </div>
+            <div class="panel-body">
+              <table class="table table-hover table-striped" id='lab-table'>
+                <thead>
+                  <tr>
+                    <th>Lab Name</th>
+                    <th>Address</th>
+                    <th>Partners Affiliate</th>
+                    <th>Lab Orders</th>
+                    <th>Phone</th>
+                    <th>Fax</th>
+                    <th></th>
+                    <th></th>                  
+                  </tr>
+                </thead>
+                <tbody .table-striped>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Add Employee  -->
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Add Train</strong></h3>
+            </div>
+            <div class="panel-body">
+
+              <!-- Entry Form -->
+              <form>
+                <div class="form-group">
+                  <label for="train-name-input">Train Name</label>
+                  <input class="form-control" id="train-name-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="destination-input">Destination</label>
+                  <input class="form-control" id="destination-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="first-train-input">First Train Time (HH:mm - military time)</label>
+                  <input class="form-control" id="first-train-input" type="text">
+                </div>
+                <div class="form-group">
+                  <label for="frequency-input">Frequency (min)</label>
+                  <input class="form-control" id="frequency-input" type="text">
+                </div>
+                <button class="btn btn-primary" id="add-train-btn" type="submit">Submit</button>
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+     <script src="https://use.fontawesome.com/71ea549139.js"></script>
+    <!-- javascript  -->
+    <script type="text/javascript" src="assets/javascript/admin.js"></script>
+</body>
+
+</html>
