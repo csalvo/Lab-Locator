@@ -12,12 +12,18 @@ var database = firebase.database();
 
 loadLabs();
 
+$("#addLabButton").on("click", function(){
+$('#addLabModal').modal('show')
+
+});
+
 $("#searchButton").on("click", function() {
     var searchFor = $("#searchBox").val();
     if (searchFor != ""){
     	searchLabs(searchFor);
+    	$(".alert").alert('close');
     } else{
-    	$("#search").append("<div id='searchValidation'>Please enter a search term</div>");
+    	$("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Please enter a search term.</div>');
     }
     
 });
@@ -36,12 +42,14 @@ function searchLabs(searchTerm) {
     });
     currentSearch = JSON.search(searchArray, "//*[contains(text(),'" + searchTerm + "')]/..");
 
+    $(".panel-title").text("Labs containing '" + searchTerm + "'");
+
     if (currentSearch.length > 0) {
         for (var i = 0; i < currentSearch.length; i++) {
             row = '<tr><td>' + currentSearch[i].labName + '</td><td>' + currentSearch[i].address + ", " +
                 currentSearch[i].city + ", " + currentSearch[i].state + ", " + currentSearch[i].zip + '</td><td>' +
                 currentSearch[i].partnersAffiliate + '</td><td>' + currentSearch[i].labOrders + '</td><td>' +
-                currentSearch[i].phone + '</td><td>' + currentSearch[i].fax + '</td><td><i class="fa fa-pencil" aria-hidden="true"></i></td><td><i class="fa fa-times-circle-o" aria-hidden="true"></i></td></tr><hr>';
+                currentSearch[i].phone + '</td><td>' + currentSearch[i].fax + '</td><td><i class="fa fa-pencil" aria-hidden="true"></i></td><td><i class="fa fa-times" aria-hidden="true"></i></td></tr><hr>';
             $("#lab-table tbody").append(row);
         }
 
@@ -54,6 +62,8 @@ function searchLabs(searchTerm) {
 function clearSearch() {
     $('#lab-table tbody').empty();
     $("#searchBox").val("");
+    $(".panel-title").text("Labs");
+    $(".alert").alert('close');
     loadLabs();
 }
 
@@ -62,8 +72,12 @@ function loadLabs() {
         var row = '<tr><td>' + snapshot.val().labName + '</td><td>' + snapshot.val().address + ", " + snapshot.val().city +
             ", " + snapshot.val().state + ", " + snapshot.val().zip +
             '</td><td>' + snapshot.val().partnersAffiliate + '</td><td>' + snapshot.val().labOrders + '</td><td>' + snapshot.val().phone + '</td><td>' + snapshot.val().fax +
-            '</td><td><i class="fa fa-pencil" aria-hidden="true"></i></td><td><i class="fa fa-times-circle-o" aria-hidden="true"></i></td></tr><hr>';
+            '</td><td><i class="fa fa-pencil" aria-hidden="true"></i></td><td><i class="fa fa-times" aria-hidden="true"></i></td></tr><hr>';
 
         $("#lab-table tbody").append(row);
     });
+}
+
+function addNewLab(labName, labAddress, labCity, labZip, labState, labZip, labAffiliate, labOrdersType, labAppointment, labPracticeOnly, labPhone, labFax){
+	
 }
