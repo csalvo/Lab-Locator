@@ -9,23 +9,35 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
+var ref = database.ref("labList");
 
 loadLabs();
 
-$("#addLabButton").on("click", function(){
-$('#addLabModal').modal('show')
+$("#addLabButton").on("click", function() {
+    $('#addLabModal').modal('show')
 
+});
+
+
+//should probably add double click prevention 
+$("#saveLab").on("click", function() {
+	//clear double click prevention
+		$("#saveLab").prop('disabled', false);
+
+   	    addNewLab();
+    	$('#addLabModal').modal('hide')
+    	clearModalInfo();
 });
 
 $("#searchButton").on("click", function() {
     var searchFor = $("#searchBox").val();
-    if (searchFor != ""){
-    	searchLabs(searchFor);
-    	$(".alert").alert('close');
-    } else{
-    	$("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Please enter a search term.</div>');
+    if (searchFor != "") {
+        searchLabs(searchFor);
+        $(".alert").alert('close');
+    } else {
+        $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Please enter a search term.</div>');
     }
-    
+
 });
 
 $("#clearButton").on("click", function() {
@@ -36,7 +48,6 @@ function searchLabs(searchTerm) {
 
     $('#lab-table tbody').empty();
     searchArray = [];
-    var ref = database.ref("labList");
     ref.on("child_added", function(snapshot) {
         searchArray.push(snapshot.val())
     });
@@ -56,7 +67,7 @@ function searchLabs(searchTerm) {
     } else if (currentSearch <= 0) {
         row = '<tr><td>No labs found. Try a new search.</td><td>'
         $("#lab-table tbody").append(row);
-    } 
+    }
 }
 
 function clearSearch() {
@@ -68,7 +79,7 @@ function clearSearch() {
 }
 
 function loadLabs() {
-    database.ref("/labList/").orderByChild("/labName").on("child_added", function(snapshot) {
+    ref.orderByChild("/labName").on("child_added", function(snapshot) {
         var row = '<tr><td>' + snapshot.val().labName + '</td><td>' + snapshot.val().address + ", " + snapshot.val().city +
             ", " + snapshot.val().state + ", " + snapshot.val().zip +
             '</td><td>' + snapshot.val().partnersAffiliate + '</td><td>' + snapshot.val().labOrders + '</td><td>' + snapshot.val().phone + '</td><td>' + snapshot.val().fax +
@@ -78,6 +89,50 @@ function loadLabs() {
     });
 }
 
-function addNewLab(labName, labAddress, labCity, labZip, labState, labZip, labAffiliate, labOrdersType, labAppointment, labPracticeOnly, labPhone, labFax){
-	
+function addNewLab() {
+    //grab values from text fields
+    var labName = $("#lab-name-input").val();
+    var labAddress1 = $("#address-input").val();
+    var labCity = $("#city-input").val();
+    var labState = $("#state").val();
+    var labZip = $("#zip-input").val();
+    var labPhone = $("#phone-input").val();
+    var labFax = $("#fax-input").val();
+    var labPartnersAffiliate = $("#partnersAffiliate-input").val();
+    var labOrders = $("#labOrders-input").val();
+    var labAppointment = $("#appointment-input").val();
+    var labPractice = $("#practice-input").val();
+
+    //set up object to be pushed to the DB
+    var newLab = {
+        labName: labName,
+        address: labAddress1,
+        city: labCity,
+        state: labState,
+        zip: labZip,
+        partnersAffiliate: labPartnersAffiliate,
+        labOrders: labOrders,
+        labAppointment: labAppointment,
+        practiceOnly: labPractice,
+        phone: labPhone,
+        fax: labFax
+    }
+    ref.push(newLab);
+    
+    //double click prevention in case the db is slow 
+	$("#saveLab").prop('disabled', true);
+}
+
+function clearModalInfo(){
+	$("#lab-name-input").val("");
+    $("#address-input").val("");
+    $("#city-input").val("");
+    $("#state").val("");
+     $("#zip-input").val("");
+    $("#phone-input").val("");
+    $("#fax-input").val("");
+    $("#partnersAffiliate-input").val("");
+    $("#labOrders-input").val("");
+    $("#appointment-input").val("");
+    $("#practice-input").val("");
 }
