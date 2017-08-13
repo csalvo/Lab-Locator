@@ -28,7 +28,6 @@ $("#btnLogin").click(function authAdmin(){
   var errorMessage = error.message;
   // ...
 });
-
   
   if (firebase.auth()) {
       console.log("yep");
