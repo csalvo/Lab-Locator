@@ -5,12 +5,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel = "stylesheet" type = "text/css" href = "assets/css/styles.css"></link>
 </head>
 <body>
+
 <container class="labContainer">
 	
 	<div class="row">
@@ -53,7 +54,8 @@
 						  <input type="integer" class="form-control" id="enterPw" placeholder="password">
 					  </div>
 			      <div class="modal-footer">
-			        <button id="btnLogin" type="button" class="btn btn-default" data-dismiss="modal">Sign In</button>
+			        <button id="btnLogin" type="button" class="btn btn-default" data-dismiss="modal">Log In</button>
+			        <button id="btnSignUp" type="button" class="btn btn-default" data-dismiss="modal">Sign Up</button>
 			      </div>
 			      </form>
       		</div>
@@ -63,10 +65,10 @@
 	</div>
 
 <!--Button for printing the modal window. This needs to become active once directions are generated.-->
-<button onclick="myFunction()">Print this page</button>
+<button onclick="print()">Print this page</button>
 
 <script>
-function myFunction() {
+function print() {
     window.print();
 }
 </script>
