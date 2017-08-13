@@ -11,17 +11,24 @@
 
 .modal-content {
     background-color: #fefefe;
-    padding: 50px;
     height: 100%;
+    padding: 50px
 }
 
 #searchBox {
-    margin: 50px;
-    max-width: 60%;
+    margin-top: 20px;
+    max-width: 80%;
 }
 
 #submit {
     margin: 25px;
+    background-color: #f3323a;
+    color: white;
+}
+
+#dropdownMenuButton {
+    background-color: #f3323a;
+    color: white;
 }
 
 #dropDownBtn {
@@ -30,8 +37,7 @@
     background-color: white;
 }
 
-
-
-
-
-/*Main Page*/
+#mainPage {
+    margin: 50px;
+    height: 100%;
+}
