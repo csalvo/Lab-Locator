@@ -14,15 +14,17 @@ var ref = database.ref("labList");
 loadLabs();
 
 $("#addLabButton").on("click", function() {
-    $('#addLabModal').modal('show')
+
+    $('#addLabModal').modal('show');
+    	//clear double click prevention
+			$("#saveLab").removeProp('disabled', false);
 
 });
 
 
 //should probably add double click prevention 
 $("#saveLab").on("click", function() {
-	//clear double click prevention
-		$("#saveLab").prop('disabled', false);
+	
 
    	    addNewLab();
     	$('#addLabModal').modal('hide')
@@ -118,7 +120,7 @@ function addNewLab() {
         fax: labFax
     }
     ref.push(newLab);
-    
+
     //double click prevention in case the db is slow 
 	$("#saveLab").prop('disabled', true);
 }
