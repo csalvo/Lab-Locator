@@ -14,21 +14,15 @@ var ref = database.ref("labList");
 loadLabs();
 
 $("#addLabButton").on("click", function() {
-
     $('#addLabModal').modal('show');
-    	//clear double click prevention
-			$("#saveLab").removeProp('disabled', false);
-
+    //clear double click prevention
+    $("#saveLab").removeProp('disabled', false);
 });
 
-
-//should probably add double click prevention 
 $("#saveLab").on("click", function() {
-	
-
-   	    addNewLab();
-    	$('#addLabModal').modal('hide')
-    	clearModalInfo();
+    addNewLab();
+    $('#addLabModal').modal('hide')
+    clearModalInfo();
 });
 
 $("#searchButton").on("click", function() {
@@ -44,6 +38,11 @@ $("#searchButton").on("click", function() {
 
 $("#clearButton").on("click", function() {
     clearSearch();
+});
+
+$("#lab-table tbody").on("click", "#deleteLab", function() {
+    ref.child(this.value).remove();
+   	deleteRow(this);
 });
 
 function searchLabs(searchTerm) {
@@ -62,7 +61,7 @@ function searchLabs(searchTerm) {
             row = '<tr><td>' + currentSearch[i].labName + '</td><td>' + currentSearch[i].address + ", " +
                 currentSearch[i].city + ", " + currentSearch[i].state + ", " + currentSearch[i].zip + '</td><td>' +
                 currentSearch[i].partnersAffiliate + '</td><td>' + currentSearch[i].labOrders + '</td><td>' +
-                currentSearch[i].phone + '</td><td>' + currentSearch[i].fax + '</td><td><i class="fa fa-pencil" aria-hidden="true"></i></td><td><i class="fa fa-times" aria-hidden="true"></i></td></tr><hr>';
+                currentSearch[i].phone + '</td><td>' + currentSearch[i].fax + '</td><td><i class="fa fa-pencil" aria-hidden="true"></i></td><td class="deleteLab"><i class="fa fa-times" aria-hidden="true"></i></td></tr><hr>';
             $("#lab-table tbody").append(row);
         }
 
@@ -85,7 +84,7 @@ function loadLabs() {
         var row = '<tr><td>' + snapshot.val().labName + '</td><td>' + snapshot.val().address + ", " + snapshot.val().city +
             ", " + snapshot.val().state + ", " + snapshot.val().zip +
             '</td><td>' + snapshot.val().partnersAffiliate + '</td><td>' + snapshot.val().labOrders + '</td><td>' + snapshot.val().phone + '</td><td>' + snapshot.val().fax +
-            '</td><td><i class="fa fa-pencil" aria-hidden="true"></i></td><td><i class="fa fa-times" aria-hidden="true"></i></td></tr><hr>';
+            '</td><td><button id="editLab"><i class="fa fa-pencil" aria-hidden="true"></i></button></td><td><button id="deleteLab"  value="' + snapshot.key + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>';
 
         $("#lab-table tbody").append(row);
     });
@@ -119,22 +118,37 @@ function addNewLab() {
         phone: labPhone,
         fax: labFax
     }
-    ref.push(newLab);
+    ref.push(newLab, function(error) {
+        if (error)
+            console.log('Error has occured during saving process')
+        else {
+            $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Your lab has been saved!</div>');
+
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 3000);
+        }
+    });
 
     //double click prevention in case the db is slow 
-	$("#saveLab").prop('disabled', true);
+    $("#saveLab").prop('disabled', true);
 }
 
-function clearModalInfo(){
-	$("#lab-name-input").val("");
+function clearModalInfo() {
+    $("#lab-name-input").val("");
     $("#address-input").val("");
     $("#city-input").val("");
     $("#state").val("");
-     $("#zip-input").val("");
+    $("#zip-input").val("");
     $("#phone-input").val("");
     $("#fax-input").val("");
     $("#partnersAffiliate-input").val("");
     $("#labOrders-input").val("");
     $("#appointment-input").val("");
     $("#practice-input").val("");
+}
+
+function deleteRow(r) {
+    var i = r.parentNode.parentNode.rowIndex;
+    document.getElementById("lab-table").deleteRow(i);
 }
