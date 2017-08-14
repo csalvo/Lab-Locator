@@ -32,6 +32,9 @@ $("#searchButton").on("click", function() {
         $(".alert").alert('close');
     } else {
         $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Please enter a search term.</div>');
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 2000);
     }
 
 });
@@ -42,7 +45,9 @@ $("#clearButton").on("click", function() {
 
 $("#lab-table tbody").on("click", "#deleteLab", function() {
     ref.child(this.value).remove();
-   	deleteRow(this);
+    deleteRow(this);
+    $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Selected lab has been deleted.</div>');
+
 });
 
 function searchLabs(searchTerm) {
