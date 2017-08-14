@@ -44,11 +44,27 @@ $("#clearButton").on("click", function() {
 });
 
 $("#lab-table tbody").on("click", "#deleteLab", function() {
-    ref.child(this.value).remove();
-    deleteRow(this);
-    $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Selected lab has been deleted.</div>');
-
+    $('#confirmDelete').modal('show');
+    labIdToDelete = this.value;
+    labRowToDelete = this;
+    console.log(labIdToDelete, labRowToDelete);
 });
+
+$("#delete").on("click", function() {
+    ref.child(labIdToDelete).remove(function(error) {
+        if (error)
+            console.log('Error has occured during saving process')
+        else {
+            $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Selected lab has been deleted.</div>');
+
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 3000);
+        }
+    });
+    deleteRow(labRowToDelete);
+});
+
 
 function searchLabs(searchTerm) {
 
