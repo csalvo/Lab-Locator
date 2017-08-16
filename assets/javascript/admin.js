@@ -10,6 +10,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 var ref = database.ref("labList");
+var editing = false;
 
 loadLabs();
 
@@ -20,18 +21,24 @@ $("#addLabButton").on("click", function() {
 });
 
 $("#saveLab").on("click", function() {
-    addNewLab();
-    $('#addLabModal').modal('hide')
+    if (editing) {
+        saveEditedLabData(labIdToEdit);
+        displayEditedLabData(labIdToEdit);
+    }
+    if (!editing) {
+        addNewLab();
+    }
+
+    $('#addLabModal').modal('hide');
     clearModalInfo();
+    editing = false;
 });
 
-$("#cancelAddLab").on("click", function(){
+$("#cancelAddLab").on("click", function() {
     clearModalInfo();
 });
 
 $("#searchButton").on("click", function() {
-      $("#lab-table tbody").append("<img id='loading' class='center-block' src='assets/images/loading.gif'>");
-
     var searchFor = $("#searchBox").val();
     if (searchFor != "") {
         searchLabs(searchFor);
@@ -48,10 +55,22 @@ $("#clearButton").on("click", function() {
     clearSearch();
 });
 
+//delete lab
 $("#lab-table tbody").on("click", "#deleteLab", function() {
     $('#confirmDelete').modal('show');
     labIdToDelete = this.value;
     labRowToDelete = this;
+});
+
+//edit lab
+$("#lab-table tbody").on("click", "#editLab", function() {
+    $("#saveLab").removeProp('disabled', false);
+    editing = true;
+    $('#addLabModal').modal('show')
+    $(".addEditTitle").text("Edit Lab");
+    labIdToEdit = this.value;
+    labRowToEdit = this;
+    displayDataForEditLab();
 });
 
 $("#delete").on("click", function() {
@@ -109,25 +128,14 @@ function loadLabs() {
         var row = '<tr><td>' + snapshot.val().labName + '</td><td>' + snapshot.val().address + ", " + snapshot.val().city +
             ", " + snapshot.val().state + ", " + snapshot.val().zip +
             '</td><td>' + snapshot.val().partnersAffiliate + '</td><td>' + snapshot.val().labOrders + '</td><td>' + snapshot.val().phone + '</td><td>' + snapshot.val().fax +
-            '</td><td><button id="editLab"><i class="fa fa-pencil" aria-hidden="true"></i></button></td><td><button id="deleteLab"  value="' + snapshot.key + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>';
+            '</td><td><button id="editLab" value="' + snapshot.key + '"><i class="fa fa-pencil" aria-hidden="true"></i></button></td><td><button id="deleteLab"  value="' + snapshot.key + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>';
 
         $("#lab-table tbody").append(row);
     });
 }
 
 function addNewLab() {
-    //grab values from text fields
-    var labName = $("#lab-name-input").val();
-    var labAddress1 = $("#address-input").val();
-    var labCity = $("#city-input").val();
-    var labState = $("#state").val();
-    var labZip = $("#zip-input").val();
-    var labPhone = $("#phone-input").val();
-    var labFax = $("#fax-input").val();
-    var labPartnersAffiliate = $("#partnersAffiliate-input").val();
-    var labOrders = $("#labOrders-input").val();
-    var labAppointment = $("#appointment-input").val();
-    var labPractice = $("#practice-input").val();
+    getLabDataFromTextInputs();
 
     //set up object to be pushed to the DB
     var newLab = {
@@ -177,3 +185,120 @@ function deleteRow(r) {
     var i = r.parentNode.parentNode.rowIndex;
     document.getElementById("lab-table").deleteRow(i);
 }
+
+function getLabDataFromTextInputs() {
+    labName = $("#lab-name-input").val();
+    labAddress1 = $("#address-input").val();
+    labCity = $("#city-input").val();
+    labState = $("#state").val();
+    labZip = $("#zip-input").val();
+    labPhone = $("#phone-input").val();
+    labFax = $("#fax-input").val();
+    labPartnersAffiliate = $("#partnersAffiliate-input").val();
+    labOrders = $("#labOrders-input").val();
+    labAppointment = $("#appointment-input").val();
+    labPractice = $("#practice-input").val();
+}
+
+function displayDataForEditLab() {
+    ref.child(labIdToEdit).once("value", function(snapshot) {
+        $("#lab-name-input").val(snapshot.val().labName);
+        $("#address-input").val(snapshot.val().address);
+        $("#city-input").val(snapshot.val().city);
+        $("#state").val(snapshot.val().state);
+        $("#zip-input").val(snapshot.val().zip);
+        $("#phone-input").val(snapshot.val().phone);
+        $("#fax-input").val(snapshot.val().fax);
+        $("#partnersAffiliate-input").val(snapshot.val().partnersAffiliate);
+        $("#labOrders-input").val(snapshot.val().labOrders);
+        $("#appointment-input").val(snapshot.val().labAppointment);
+        $("#practice-input").val(snapshot.val().practiceOnly);
+    });
+}
+
+function saveEditedLabData(id) {
+    getLabDataFromTextInputs();
+
+    var editedLab = {
+        labName: labName,
+        address: labAddress1,
+        city: labCity,
+        state: labState,
+        zip: labZip,
+        partnersAffiliate: labPartnersAffiliate,
+        labOrders: labOrders,
+        labAppointment: labAppointment,
+        practiceOnly: labPractice,
+        phone: labPhone,
+        fax: labFax
+    }
+
+    database.ref("labList/" + id).update(editedLab, function(error){
+                if (error)
+            $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Lab was not edited.</div>');
+        else {
+            $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Edits have been saved.</div>');
+        }
+    });
+
+
+}
+
+function displayEditedLabData(id) {
+    $(labRowToEdit).parent().parent().replaceWith('<tr><td>' + labName + '</td><td>' + labAddress1 + ", " + labCity + ", " + labState + ", " +
+        labZip + '</td><td>' + labPartnersAffiliate + '</td><td>' + labOrders + '</td><td>' + labPhone + '</td><td>' + labFax +
+        '</td><td><button id="editLab" value="' + id + '"><i class="fa fa-pencil" aria-hidden="true"></i></button></td><td><button id="deleteLab"  value="' +
+        id + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>');
+}
+//auth admin
+
+
+function adminChanges() {
+
+    var adminEmail = $("#adminEmail");
+    var password = $("#enterPw");
+    var btnLogin = $("#btnLogin");
+    var btnSignUp = $("#btnSignup");
+    var btnLogout = $("#btnLogout");
+
+    $("#btnLogin").click(function authAdmin() {
+        $('#adminModal').modal('show');
+
+
+        var email = adminEmail.val();
+        var pass = password.val();
+        var auth = firebase.auth();
+        firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+        });
+
+        if (firebase.auth()) {
+            console.log("yep");
+            window.open("admin.html");
+        } else {
+            console.log("nope");
+        }
+
+    });
+
+    $("#btnSignUp").click(function() {
+        var email = adminEmail.val();
+        var pass = password.val();
+        var auth = firebase.auth();
+        var promise = auth.createUserWithEmailAndPassword(email, pass);
+    });
+
+    $("#btnLogout").click(function() {
+        firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+        }).catch(function(error) {
+            // An error happened.
+        });
+    });
+
+};
+
+adminChanges();
