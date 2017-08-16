@@ -233,12 +233,15 @@ function saveEditedLabData(id) {
         fax: labFax
     }
 
-    database.ref("labList/" + id).update(editedLab, function(error){
-                if (error)
+    database.ref("labList/" + id).update(editedLab, function(error) {
+        if (error)
             $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Lab was not edited.</div>');
         else {
             $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Edits have been saved.</div>');
         }
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 3000);
     });
 
 
@@ -250,55 +253,5 @@ function displayEditedLabData(id) {
         '</td><td><button id="editLab" value="' + id + '"><i class="fa fa-pencil" aria-hidden="true"></i></button></td><td><button id="deleteLab"  value="' +
         id + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>');
 }
-//auth admin
 
 
-function adminChanges() {
-
-    var adminEmail = $("#adminEmail");
-    var password = $("#enterPw");
-    var btnLogin = $("#btnLogin");
-    var btnSignUp = $("#btnSignup");
-    var btnLogout = $("#btnLogout");
-
-    $("#btnLogin").click(function authAdmin() {
-        $('#adminModal').modal('show');
-
-
-        var email = adminEmail.val();
-        var pass = password.val();
-        var auth = firebase.auth();
-        firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-        });
-
-        if (firebase.auth()) {
-            console.log("yep");
-            window.open("admin.html");
-        } else {
-            console.log("nope");
-        }
-
-    });
-
-    $("#btnSignUp").click(function() {
-        var email = adminEmail.val();
-        var pass = password.val();
-        var auth = firebase.auth();
-        var promise = auth.createUserWithEmailAndPassword(email, pass);
-    });
-
-    $("#btnLogout").click(function() {
-        firebase.auth().signOut().then(function() {
-            // Sign-out successful.
-        }).catch(function(error) {
-            // An error happened.
-        });
-    });
-
-};
-
-adminChanges();
