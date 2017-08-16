@@ -1,64 +1,80 @@
 #map {
-  height:400px;
-  width: 100%;
+    height: 400px;
+    width: 100%;
 }
+
 body {
-  background-color: #19c0c7;
+    background-color: #19c0c7;
 }
-#search{
-  background-color: #19c0c7;
-  margin-bottom: 15px;
-  align-content: center;
+
+#search {
+    background-color: #19c0c7;
+    margin-bottom: 15px;
+    align-content: center;
 }
+
 img {
-  max-width: 40%;
-  border-radius: 4px;
+    max-width: 40%;
+    border-radius: 4px;
 }
-.btn, .form-control {
-  margin-top: 4em;
-}
+
 .topRightLogout {
-  margin-right: 5px;
-  border: 0px;
-  padding: 0px;
-  background-color: #19c0c7;
-  color: black;
+    margin-right: 5px;
+    border: 0px;
+    padding: 0px;
+    background-color: #19c0c7;
+    color: black;
 }
+
 .form-control {
-  margin-top: 5px;
+    margin-top: 5px;
 }
+
 #searchBoxAdmin {
-  margin-top: 56px;
-  width: 25%;
+    margin-top: 56px;
+    width: 25%;
 }
+
 label {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
+
 .modal-header {
-  padding: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
 }
+
 .modal-title {
-  position: bottom;
+    position: bottom;
 }
+
 .form-inline {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
-.searchDiv{
-	text-align: center;   
-	padding-bottom: 48px;
+.searchDiv {
+    text-align: center;
+    padding-bottom: 48px;
 }
 
-#searchButton{
-		background-color: #aaa !important;
+#searchButton {
+    background-color: #aaa !important;
+    margin-top: 4em;
+}
 
+#clearButton {
+    background-color: #ccc !important;
+    margin-top: 4em;
 }
-#clearButton{
-	background-color: #ccc !important;
+
+#addLabButton {
+    background-color: #eee;
+    margin-top: 4em;
 }
-#addLabButton{
-	background-color: #eee;
-}
+
+
+
+
+/*modal*/
 
 #modalNav {
     height: 60px;
@@ -77,7 +93,8 @@ label {
 
 #searchBox {
     margin-top: 20px;
-    max-width: 80%;
+    max-width: 600px;
+    width:100%;
 }
 
 #submit {
@@ -89,9 +106,11 @@ label {
 #dropdownMenuButton {
     background-color: #f3323a;
     color: white;
+    margin-top:4px;
 }
 
 #dropDownBtn {
+    height: 39px;
     outline: none;
     border: none;
     background-color: white;
@@ -102,6 +121,6 @@ label {
     height: 100%;
 }
 
-.navbar-header, .navbar {
-	background-color: #fff;
+#example-text-input{
+	width: 100%;
 }
