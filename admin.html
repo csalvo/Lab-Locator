@@ -13,7 +13,7 @@
     <!-- Chrome Tab Icon -->
     <link rel="shortcut icon" href="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiz05TL8M3VAhVs74MKHfoWA-sQjRwIBw&url=https%3A%2F%2Fwww.flaticon.com%2Ffree-icons%2Ferlenmeyer-flask_168574&psig=AFQjCNFaVWYxLyvvrL2MGOSaGXE2wHvlaw&ust=1502496174912419" />
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 </head>
 
 <body>
@@ -34,16 +34,16 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-inline" id="search">
-                    <input class="form-control form-control-danger" id="searchBox" type="text">
-                    <button class="btn btn-primary" id="searchButton" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                    <button class="btn btn-danger" id="clearButton" type="submit"><i class="fa fa-ban" aria-hidden="true"></i> Clear Search</button>
-                    <button class="btn btn-sucess" id="addLabButton" type="submit"><i class="fa fa-plus" aria-hidden="true"></i> Add a New Lab</button>
+                    <input class="form-control form-control-danger" placeholder="Find a lab" id="searchBoxAdmin" type="text">
+                    <button class="btn btn-secondary" id="searchButton" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                    <button class="btn btn-secondary" id="clearButton" type="submit"><i class="fa fa-ban" aria-hidden="true"></i> Clear Search</button>
+                    <button class="btn btn-secondary" id="addLabButton" type="submit"><i class="fa fa-plus" aria-hidden="true"></i> Add Lab</button>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="panel panel-primary">
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Labs</strong></h3>
                     </div>
@@ -72,9 +72,6 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Add a New Lab</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
                             </div>
                             <div class="modal-body">
                                 <form>
@@ -198,7 +195,7 @@
                                         </select>
                                     </div>
                                     <button type="button" class="btn btn-primary" id="saveLab">Save Lab</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" id="cancelAddLab" data-dismiss="modal">Cancel</button>
                                 </form>
                             </div>
                         </div>

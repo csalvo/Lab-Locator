@@ -2,3 +2,106 @@
   height:400px;
   width: 100%;
 }
+body {
+  background-color: #19c0c7;
+}
+#search{
+  background-color: #19c0c7;
+  margin-bottom: 15px;
+  align-content: center;
+}
+img {
+  max-width: 40%;
+  border-radius: 4px;
+}
+.btn, .form-control {
+  margin-top: 4em;
+}
+.topRightLogout {
+  margin-right: 5px;
+  border: 0px;
+  padding: 0px;
+  background-color: #19c0c7;
+  color: black;
+}
+.form-control {
+  margin-top: 5px;
+}
+#searchBoxAdmin {
+  margin-top: 56px;
+  width: 25%;
+}
+label {
+  margin-bottom: 0px;
+}
+.modal-header {
+  padding: 10px 10px 10px 10px;
+}
+.modal-title {
+  position: bottom;
+}
+.form-inline {
+  margin-bottom: 10px;
+}
+
+.searchDiv{
+	text-align: center;   
+	padding-bottom: 48px;
+}
+
+#searchButton{
+		background-color: #aaa !important;
+
+}
+#clearButton{
+	background-color: #ccc !important;
+}
+#addLabButton{
+	background-color: #eee;
+}
+
+#modalNav {
+    height: 60px;
+    width: 100%;
+}
+
+#myModal {
+    display: block;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    height: 100%;
+    padding: 50px
+}
+
+#searchBox {
+    margin-top: 20px;
+    max-width: 80%;
+}
+
+#submit {
+    margin: 25px;
+    background-color: #f3323a;
+    color: white;
+}
+
+#dropdownMenuButton {
+    background-color: #f3323a;
+    color: white;
+}
+
+#dropDownBtn {
+    outline: none;
+    border: none;
+    background-color: white;
+}
+
+#mainPage {
+    margin: 50px;
+    height: 100%;
+}
+
+.navbar-header, .navbar {
+	background-color: #fff;
+}

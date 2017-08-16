@@ -10,97 +10,88 @@ var config = {
 
 var database = firebase.database();
 
+//address from input field
+var userAddress = "11 mark vincent dr westford ma";
+var startAddress = encodeURIComponent(userAddress);
+//radius from radius button dropdown
+var radius = 30;
+var dest = [];
+var sorted;
+
+
+  
 function initMap() {
-    var radius = 10;
-    var destinationsInRadius = [];
+
+    
     var service = new google.maps.DistanceMatrixService();
     labAddress = firebase.database().ref("labList");
-    labAddress.orderByValue().on("value", function(snapshot) {
+    labAddress.once("value", function(snapshot) {
         snapshot.forEach(function(data) {
         var destination = ["\""+ data.val().address + ", " + data.val().city + ", " + data.val().state + ", " + data.val().zip + "\""];
+        var name = data.val().labName;
+        var address = data.val().address + ", " + data.val().city + ", " + data.val().state + " " + data.val().zip;
+        var partnersAffiliate = data.val().partnersAffiliate;
+        var labOrders = data.val().labOrders;
+        var labAppointment = data.val().labAppointment;
+        var practiceOnly = data.val().practiceOnly;
+        var phone = data.val().phone;
+        var fax = data.val().fax;      
         service.getDistanceMatrix({
-                origins: ['27 tamarock terrace stoneham, ma 02180'],
+                origins: [userAddress],
                 destinations: destination,
                 travelMode: 'DRIVING',
                 unitSystem: google.maps.UnitSystem.IMPERIAL
             }, function(response, status) {
+          console.log("1.response: " + response)
           if (status !== 'OK') {
             alert('Error was: ' + status);
           } else {
+            console.log(status);
             var labDistance = response.rows[0].elements[0].distance.text;
+            console.log("2. lab distance: " + labDistance)
             var intLabDistance = labDistance.substr(0, labDistance.length-3);
             if (intLabDistance <= radius) {
-              destinationsInRadius.push(response.destinationAddresses[0]);
+              dest.push({
+                rad: intLabDistance, 
+                sortName: name,
+                sortAddy: address,
+                sortPartners: partnersAffiliate,
+                sortLabO: labOrders,
+                sortlabA: labAppointment,
+                sortPractice: practiceOnly,
+                sortPhone: phone,
+                sortFax: fax
+              });  
             }
-
           } 
         });
-
       });
-
+  makeMaps();
     });
-
   }
-  console.log(destinationsInRadius);
-// 
-//         var place = {lat: latitude, lng: longitude};
-//         var map = new google.maps.Map(document.getElementById(id), {
-//           zoom: 8,
-//           center: place
-//         });
-//         var marker = new google.maps.Marker({
-//           position: place,
-//           map: map
-//         });
-//       }
 
+function makeMaps() {
+    $("#lab-title").html("Labs found within " + radius + " miles of " + userAddress);
+    $("#mapTable").append("<img id='loading' class='center-block' src='assets/images/loading.gif'>");  
 
-
-// $(document).ready(function() {
-
-
-// //database.ref().remove();
-// //for (var i = 0; i < labList.length; i++) {
-// // database.ref("labList").push({
-// //   labName: labList[i].labName,
-// //   address: labList[i].address,
-// //   city: labList[i].city,
-// //   state: labList[i].state,
-// //        zip: labList[i].zip,
-// //        partnersAffiliate: labList[i].partnersAffiliate,
-// //        labOrders: labList[i].labOrders,
-// //        labAppointment: labList[i].labAppointment,
-// //        practiceOnly: labList[i].practiceOnly,
-// //        phone: labList[i].phone,
-// //        fax: labList[i].fax
-// // });
-// //}
-
-
-
-
-
-// //var array = [];
-// //
-// //database.ref("apple").set("one");
-// //  var query = firebase.database().ref("labList").orderByKey();
-// //query.once("value")
-// //  .then(function(snapshot) {
-// //    snapshot.forEach(function(childSnapshot) {
-// //      // key will be "ada" the first time and "alan" the second time
-// //      var key = childSnapshot.key;
-// //      // childData will be the actual contents of the child
-// //      var childData = childSnapshot.val();
-// //      array.push(childData.address);
-// //  });
-// //});
-// //google maps directions api key: AIzaSyCu4jYgdD50LGmt0i8ZJ09EW89Cck-NVtc
-
-// //google maps javascript api key: AIzaSyCZ29LFbmjkpo67GRatcSUgAp5kCO4Ncso
-// //  "https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-
-// //google maps geocoding api key: AIzaSyDKT8TTq-HUOcagvAUPHbhIMUNfGvW-3XI
-// //  "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY"
-// //  AIzaSyBjn7kdkVnqf_K6MfQgOJmkmdYjVXelCR4
-
-// });
+    // setTimeout(function() {
+   
+    sorted = dest.sort(function(obj1, obj2){
+        return obj1.rad - obj2.rad;
+      });
+     console.log("3.sorted: " + sorted);
+      for (var i = 0; i < sorted.length; i++) {
+        var endAddress = encodeURIComponent(sorted[i].sortAddy);
+        $("#loading").hide();
+        console.log(sorted[i].rad);
+        $("#mapTable").append('<tr><td><div class="miles">' + sorted[i].rad + ' miles away</div><div class="nameDiv"><strong>' + sorted[i].sortName + '</strong></div><div>' + sorted[i].sortAddy + '</div><div>Hospital Affiliation: ' + sorted[i].sortPartners + '</div><div>Lab Orders: ' + sorted[i].sortLabO + '</div><div>Need Appointment: ' + sorted[i].sortlabA + '</div><div>Practice Only: ' + sorted[i].sortPractice + '</div><div>Phone: ' + sorted[i].sortPhone + '</div><div>Fax: ' + sorted[i].sortFax + '</div></td><td><img class="img-responsive" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyA5BItXvjAHI3qHoMYig0iUMQoNcbeHGTU&size=500x400&markers=' + endAddress + '"><br><a target="_blank" href="https://www.google.com/maps/dir/' + startAddress + '/' + endAddress + '/">Get Directions to ' + sorted[i].sortName + '</a></td></tr>');
+        }
+    // }, 2000);
+  // setTimeout(function() {
+   if (sorted.length === 0) {
+     console.log("4. no maps");
+      $("#loading").hide();
+      $("#mapTable").append("<div id='noLabs'>There are no labs within the radius you selected.  Please click here to try again:</div><button id='newSearch' type='button' class='btn btn-default'>New Search</button>");
+    }
+    // }, 5000); 
+}

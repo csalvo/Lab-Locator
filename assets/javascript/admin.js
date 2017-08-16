@@ -25,7 +25,13 @@ $("#saveLab").on("click", function() {
     clearModalInfo();
 });
 
+$("#cancelAddLab").on("click", function(){
+    clearModalInfo();
+});
+
 $("#searchButton").on("click", function() {
+      $("#lab-table tbody").append("<img id='loading' class='center-block' src='assets/images/loading.gif'>");
+
     var searchFor = $("#searchBox").val();
     if (searchFor != "") {
         searchLabs(searchFor);
@@ -36,7 +42,6 @@ $("#searchButton").on("click", function() {
             $(".alert").alert('close');
         }, 2000);
     }
-
 });
 
 $("#clearButton").on("click", function() {
@@ -47,27 +52,26 @@ $("#lab-table tbody").on("click", "#deleteLab", function() {
     $('#confirmDelete').modal('show');
     labIdToDelete = this.value;
     labRowToDelete = this;
-    console.log(labIdToDelete, labRowToDelete);
 });
 
 $("#delete").on("click", function() {
+    $('#confirmDelete').modal('hide');
     ref.child(labIdToDelete).remove(function(error) {
         if (error)
-            console.log('Error has occured during saving process')
+            $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Lab was not deleted.</div>');
         else {
             $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Selected lab has been deleted.</div>');
-
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 3000);
         }
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 3000);
+
     });
     deleteRow(labRowToDelete);
 });
 
 
 function searchLabs(searchTerm) {
-
     $('#lab-table tbody').empty();
     searchArray = [];
     ref.on("child_added", function(snapshot) {
@@ -141,14 +145,14 @@ function addNewLab() {
     }
     ref.push(newLab, function(error) {
         if (error)
-            console.log('Error has occured during saving process')
+            $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Your lab was not saved.</div>');
         else {
             $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Your lab has been saved!</div>');
-
-            setTimeout(function() {
-                $(".alert").alert('close');
-            }, 3000);
         }
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 3000);
+
     });
 
     //double click prevention in case the db is slow 
