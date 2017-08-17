@@ -1,3 +1,23 @@
+var modal = $("#myModal");
+modal.css("display", "block");
+
+var username = "adam.g.wallis@gmail.com"
+var password = "password"
+
+
+$("#loginButtonAdminModal").click(function() {
+    var usernameInput = $("#adminEmail").val();
+    var passwordInput = $("#adminPw").val();
+    console.log(usernameInput, username, password, passwordInput);
+    if (usernameInput === username && passwordInput === password) {
+        modal.hide();
+    } else {
+        $(".alert").alert('close');
+        $(".alertAdmin").prepend('<div class="alert alert-data alert-danger" role="alert"><strong>Invalid username or password.</div>');
+    }
+});
+
+
 var config = {
     apiKey: "AIzaSyBp0NeXcn_s0KN5Fk5GzKFrVUROXVPfwFY",
     authDomain: "lab-locator.firebaseapp.com",
@@ -270,7 +290,6 @@ function displayEditedLabData(id) {
 }
 
 function formValidation() {
-
     $("#lab-name-label").css("color", "red");
     $("#lab-address-label").css("color", "red");
     $("#lab-city-label").css("color", "red");

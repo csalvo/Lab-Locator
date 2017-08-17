@@ -211,3 +211,23 @@ label {
 .modalButtons {
     text-align: right;
 }
+
+#loginButtonAdminModal {
+    background-color: #f3323a !important;
+    color: #fff;
+}
+
+.adminModalContent {
+/*  margin-top: 300px;*/
+  background: #ebf0ef;
+  height: 370px;
+  width: 600px;
+  border-radius: 15px;
+  padding: 45px 150px 25px 150px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+
