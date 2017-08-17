@@ -5,6 +5,8 @@
 
 body {
     background-color: #19c0c7;
+    font-family: Mada;
+    font-size: 1.5em;
 }
 
 #search {
@@ -57,70 +59,55 @@ label {
 }
 
 #searchButton {
-    background-color: #aaa !important;
+    background-color: #888 !important;
     margin-top: 4em;
+    color: #fff;
 }
 
 #clearButton {
-    background-color: #ccc !important;
+    background-color: #666 !important;
     margin-top: 4em;
+    color: #fff;
 }
 
 #addLabButton {
-    background-color: #eee;
+    float: right;
+    background-color: #f3323a;
     margin-top: 4em;
+    color: #fff;
 }
 
 
-
-
-/*modal*/
-
-#modalNav {
-    height: 60px;
-    width: 100%;
-}
-
-#myModal {
-    display: block;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    height: 100%;
-    padding: 50px
-}
-
-#searchBox {
+#saveLab {
+    background-color: #f3323a !important;
+    color: #fff;
     margin-top: 20px;
-    max-width: 600px;
-    width:100%;
 }
 
-#submit {
-    margin: 25px;
-    background-color: #f3323a;
-    color: white;
+#delete {
+    background-color: #f3323a !important;
+    color: #fff;
+    margin-top: 20px;
 }
 
-#dropdownMenuButton {
-    background-color: #f3323a;
-    color: white;
-    margin-top:4px;
+#cancelDelete {
+    margin-top: 20px;
+    color: #fff;
+    background-color: #888 !important;
 }
 
-#dropDownBtn {
-    height: 39px;
-    outline: none;
-    border: none;
-    background-color: white;
+
+#cancelAddLab {
+    margin-top: 20px;
+    color: #fff;
+    background-color: #888 !important;
 }
 
-#mainPage {
-    margin: 50px;
-    height: 100%;
+#editLab:hover,
+#deleteLab:hover {
+    cursor: pointer;
 }
 
-#example-text-input{
-	width: 100%;
+.modalButtons {
+    text-align: right;
 }

@@ -39,7 +39,7 @@ $("#cancelAddLab").on("click", function() {
 });
 
 $("#searchButton").on("click", function() {
-    var searchFor = $("#searchBox").val();
+    var searchFor = $("#searchBoxAdmin").val();
     if (searchFor != "") {
         searchLabs(searchFor);
         $(".alert").alert('close');
@@ -117,7 +117,7 @@ function searchLabs(searchTerm) {
 
 function clearSearch() {
     $('#lab-table tbody').empty();
-    $("#searchBox").val("");
+    $("#searchBoxAdmin").val("");
     $(".panel-title").text("Labs");
     $(".alert").alert('close');
     loadLabs();
@@ -128,7 +128,7 @@ function loadLabs() {
         var row = '<tr><td>' + snapshot.val().labName + '</td><td>' + snapshot.val().address + ", " + snapshot.val().city +
             ", " + snapshot.val().state + ", " + snapshot.val().zip +
             '</td><td>' + snapshot.val().partnersAffiliate + '</td><td>' + snapshot.val().labOrders + '</td><td>' + snapshot.val().phone + '</td><td>' + snapshot.val().fax +
-            '</td><td><button id="editLab" value="' + snapshot.key + '"><i class="fa fa-pencil" aria-hidden="true"></i></button></td><td><button id="deleteLab"  value="' + snapshot.key + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>';
+            '</td><td><span id="editLab" value="' + snapshot.key + '"><i class="fa fa-pencil" aria-hidden="true"></i></span></td><td><span id="deleteLab"  value="' + snapshot.key + '"><i class="fa fa-times" aria-hidden="true"></i></span></td></tr><hr>';
 
         $("#lab-table tbody").append(row);
     });
