@@ -21,17 +21,23 @@ $("#addLabButton").on("click", function() {
 });
 
 $("#saveLab").on("click", function() {
-    if (editing) {
-        saveEditedLabData(labIdToEdit);
-        // displayEditedLabData(labIdToEdit);
-    }
-    if (!editing) {
-        addNewLab();
+    getLabDataFromTextInputs();
+    if (labName === "" || labAddress1 === "" || labCity === "" || labState === "" || labZip === "") {
+        formValidation();
+    } else {
+        if (editing) {
+            saveEditedLabData(labIdToEdit);
+            // displayEditedLabData(labIdToEdit);
+        }
+        if (!editing) {
+            addNewLab();
+        }
+
+        $('#addLabModal').modal('hide');
+        clearModalInfo();
+        editing = false;
     }
 
-    $('#addLabModal').modal('hide');
-    clearModalInfo();
-    editing = false;
 });
 
 $("#cancelAddLab").on("click", function() {
@@ -180,6 +186,13 @@ function clearModalInfo() {
     $("#labOrders-input").val("");
     $("#appointment-input").val("");
     $("#practice-input").val("");
+    $("#lab-name-label").css("color", "black");
+    $("#lab-address-label").css("color", "black");
+    $("#lab-city-label").css("color", "black");
+    $("#lab-state-label").css("color", "black");
+    $("#lab-zip-label").css("color", "black");
+    $(".alert").alert('close');
+
 }
 
 function deleteRow(r) {
@@ -256,4 +269,13 @@ function displayEditedLabData(id) {
         id + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>');
 }
 
+function formValidation() {
 
+    $("#lab-name-label").css("color", "red");
+    $("#lab-address-label").css("color", "red");
+    $("#lab-city-label").css("color", "red");
+    $("#lab-state-label").css("color", "red");
+    $("#lab-zip-label").css("color", "red");
+    $(".modal-body").prepend('<div class="alert alert-data alert-danger" role="alert"><strong>Please enter all required data.</div>');
+
+}
