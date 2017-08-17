@@ -1,0 +1,128 @@
+td {
+  padding-bottom: 50px;
+}
+
+body {
+  background: #19c0c7;
+  font-family: 'Mada', sans-serif;
+  font-size: 1.6em;
+}
+
+.navbar-default {
+  z-index: 1;
+  background: #ebf0ef;
+}
+
+.navbar-brand {
+  padding: 0;
+  margin-top: 8px;
+}
+
+/*
+.adminLogin {
+  margin-top: 8px;
+}
+*/
+
+.nameDiv {
+  font-size: 1.2em;
+}
+
+.miles {
+  padding-bottom: 15px;
+}
+
+#newSearch, #noLabs {
+  display: inline-block;
+}
+
+#newSearch {
+  margin-left: 20px;
+  background: #f3323a;
+  color: #fff;
+}
+
+#lab-title {
+  font-size: 1.5em;
+}
+
+#mapPanel {
+  min-height: 100vh;
+}
+
+@media only screen and (max-width: 480px) {
+  #newSearch {
+    margin: 0;
+  }
+}
+
+#myModal {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  background-image: url("../images/gmap.png");
+  background-size: cover;
+}
+
+.modalContent {
+/*  margin-top: 300px;*/
+  background: #ebf0ef;
+  height: 250px;
+  width: 600px;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  /* Provides cross-browser RGBa background */
+  zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#80000000', endColorstr='#80000000');
+  background: transparent;
+  background: rgba(51, 51, 51, 0.5);
+}
+
+.side {
+  display: inline-block;
+}
+
+.modalDivs {
+  padding-bottom: 25px;
+}
+
+#within {
+  margin-left: 5px;
+}
+
+#findLab {
+  background: #f3323a;
+  color: #fff;
+}
+
+#dropdownMenu1 {
+  background: #19c0c7;
+  color: #fff;
+}
+
+.vertical-center {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex; 
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
