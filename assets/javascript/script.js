@@ -69,7 +69,9 @@ var database = firebase.database();
 
 //google maps and firebase calls
 function initMap() {
-   console.log(userAddress);
+  if (radius === undefined){
+    radius = 20;
+  }
   console.log(radius);
   //creating distance matrix service
   var service = new google.maps.DistanceMatrixService();
