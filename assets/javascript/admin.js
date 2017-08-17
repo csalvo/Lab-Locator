@@ -17,6 +17,19 @@ $("#loginButtonAdminModal").click(function() {
     }
 });
 
+$("#adminPw").keyup(function() {
+    if (event.keyCode == 13) {
+    var usernameInput = $("#adminEmail").val();
+    var passwordInput = $("#adminPw").val();
+    console.log(usernameInput, username, password, passwordInput);
+    if (usernameInput === username && passwordInput === password) {
+        modal.hide();
+    } else {
+        $(".alert").alert('close');
+        $(".alertAdmin").prepend('<div class="alert alert-data alert-danger" role="alert"><strong>Invalid username or password.</div>');
+    }
+}
+});
 
 var config = {
     apiKey: "AIzaSyBp0NeXcn_s0KN5Fk5GzKFrVUROXVPfwFY",
@@ -62,6 +75,21 @@ $("#saveLab").on("click", function() {
 
 $("#cancelAddLab").on("click", function() {
     clearModalInfo();
+});
+
+$("#searchBoxAdmin").keyup(function() {
+    if (event.keyCode == 13) {
+        var searchFor = $("#searchBoxAdmin").val();
+        if (searchFor != "") {
+            searchLabs(searchFor);
+            $(".alert").alert('close');
+        } else {
+            $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Please enter a search term.</div>');
+            setTimeout(function() {
+                $(".alert").alert('close');
+            }, 2000);
+        }
+    }
 });
 
 $("#searchButton").on("click", function() {
