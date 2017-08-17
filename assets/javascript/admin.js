@@ -1,3 +1,23 @@
+var modal = $("#myModal");
+modal.css("display", "block");
+
+var username = "adam.g.wallis@gmail.com"
+var password = "password"
+
+
+$("#loginButtonAdminModal").click(function() {
+    var usernameInput = $("#adminEmail").val();
+    var passwordInput = $("#adminPw").val();
+    console.log(usernameInput, username, password, passwordInput);
+    if (usernameInput === username && passwordInput === password) {
+        modal.hide();
+    } else {
+        $(".alert").alert('close');
+        $(".alertAdmin").prepend('<div class="alert alert-data alert-danger" role="alert"><strong>Invalid username or password.</div>');
+    }
+});
+
+
 var config = {
     apiKey: "AIzaSyBp0NeXcn_s0KN5Fk5GzKFrVUROXVPfwFY",
     authDomain: "lab-locator.firebaseapp.com",
@@ -21,17 +41,23 @@ $("#addLabButton").on("click", function() {
 });
 
 $("#saveLab").on("click", function() {
-    if (editing) {
-        saveEditedLabData(labIdToEdit);
-        displayEditedLabData(labIdToEdit);
-    }
-    if (!editing) {
-        addNewLab();
+    getLabDataFromTextInputs();
+    if (labName === "" || labAddress1 === "" || labCity === "" || labState === "" || labZip === "") {
+        formValidation();
+    } else {
+        if (editing) {
+            saveEditedLabData(labIdToEdit);
+            // displayEditedLabData(labIdToEdit);
+        }
+        if (!editing) {
+            addNewLab();
+        }
+
+        $('#addLabModal').modal('hide');
+        clearModalInfo();
+        editing = false;
     }
 
-    $('#addLabModal').modal('hide');
-    clearModalInfo();
-    editing = false;
 });
 
 $("#cancelAddLab").on("click", function() {
@@ -69,6 +95,7 @@ $("#lab-table tbody").on("click", "#editLab", function() {
     $('#addLabModal').modal('show')
     $(".addEditTitle").text("Edit Lab");
     labIdToEdit = this.value;
+    console.log(this.value);
     labRowToEdit = this;
     displayDataForEditLab();
 });
@@ -128,7 +155,7 @@ function loadLabs() {
         var row = '<tr><td>' + snapshot.val().labName + '</td><td>' + snapshot.val().address + ", " + snapshot.val().city +
             ", " + snapshot.val().state + ", " + snapshot.val().zip +
             '</td><td>' + snapshot.val().partnersAffiliate + '</td><td>' + snapshot.val().labOrders + '</td><td>' + snapshot.val().phone + '</td><td>' + snapshot.val().fax +
-            '</td><td><span id="editLab" value="' + snapshot.key + '"><i class="fa fa-pencil" aria-hidden="true"></i></span></td><td><span id="deleteLab"  value="' + snapshot.key + '"><i class="fa fa-times" aria-hidden="true"></i></span></td></tr><hr>';
+            '</td><td><button id="editLab" value="' + snapshot.key + '"><i class="fa fa-pencil" aria-hidden="true"></i></button></td><td><button id="deleteLab"  value="' + snapshot.key + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>';
 
         $("#lab-table tbody").append(row);
     });
@@ -179,6 +206,13 @@ function clearModalInfo() {
     $("#labOrders-input").val("");
     $("#appointment-input").val("");
     $("#practice-input").val("");
+    $("#lab-name-label").css("color", "black");
+    $("#lab-address-label").css("color", "black");
+    $("#lab-city-label").css("color", "black");
+    $("#lab-state-label").css("color", "black");
+    $("#lab-zip-label").css("color", "black");
+    $(".alert").alert('close');
+
 }
 
 function deleteRow(r) {
@@ -238,6 +272,7 @@ function saveEditedLabData(id) {
             $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Lab was not edited.</div>');
         else {
             $("#search").prepend('<div class="alert alert-success" role="alert"><strong>Edits have been saved.</div>');
+            displayEditedLabData(id)
         }
         setTimeout(function() {
             $(".alert").alert('close');
@@ -254,4 +289,12 @@ function displayEditedLabData(id) {
         id + '"><i class="fa fa-times" aria-hidden="true"></i></button></td></tr><hr>');
 }
 
+function formValidation() {
+    $("#lab-name-label").css("color", "red");
+    $("#lab-address-label").css("color", "red");
+    $("#lab-city-label").css("color", "red");
+    $("#lab-state-label").css("color", "red");
+    $("#lab-zip-label").css("color", "red");
+    $(".modal-body").prepend('<div class="alert alert-data alert-danger" role="alert"><strong>Please enter all required data.</div>');
 
+}

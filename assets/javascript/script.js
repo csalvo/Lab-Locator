@@ -154,6 +154,7 @@ function makeMaps(labs) {
   //loop through the now sorted array and for each object, use the google maps static api to get a static map and append that map along with the lab information to the table on the main page
   for (var i = 0; i < sorted.length; i++) {
     var endAddress = encodeURIComponent(sorted[i].sortAddy);
+var startAddress = encodeURIComponent(userAddress);
     $("#mapTable").append('<tr><td><div class="miles">' + sorted[i].rad + ' miles away</div><div class="nameDiv"><strong>' + sorted[i].sortName + '</strong></div><div>' + sorted[i].sortAddy + '</div><div>Hospital Affiliation: ' + sorted[i].sortPartners + '</div><div>Lab Orders: ' + sorted[i].sortLabO + '</div><div>Need Appointment: ' + sorted[i].sortlabA + '</div><div>Practice Only: ' + sorted[i].sortPractice + '</div><div>Phone: ' + sorted[i].sortPhone + '</div><div>Fax: ' + sorted[i].sortFax + '</div></td><td><img class="img-responsive" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyA5BItXvjAHI3qHoMYig0iUMQoNcbeHGTU&size=500x400&markers=' + endAddress + '"><br><a target="_blank" href="https://www.google.com/maps/dir/' + startAddress + '/' + endAddress + '/">Get Directions to ' + sorted[i].sortName + '</a></td></tr>');
   }
   //if there are no entries in the sorted array, it means there are no labs in the specified radius

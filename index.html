@@ -2,95 +2,90 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Mada" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Locator</title>
+    <link rel="icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Mada" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#"><img src="assets/images/lablocatorlogo.PNG" alt=""></a>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href=""><i class="fa fa-sign-in" aria-hidden="true">&nbsp;&nbsp;&nbsp;Admin Login</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2">
-        <div class="panel panel-default" id="mapPanel">
-          <div class="panel-heading">
-            <h1 id="lab-title" class="panel-title"></h1>
-          </div>
-          <div class="panel-body">
-            <table class="table table-responsive" id="mapTable"></table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div id="myModal" class="modal">
     <nav class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#"><img src="assets/images/lablocatorlogo.PNG" alt=""></a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href=""><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Admin Login</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="overlay vertical-center">
-      <div class="container modalContent">
-        <div class="row">
-          <div class="col-12-lg text-center modalDivs">
-            <h1 id="find">Find a lab near...</h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12-lg text-center modalDivs">
-            <input id="enterAddy" type="text" placeholder="street address, city/state, or zip">
-            <p id="within" class="side">within...</p>
-            <div class="dropdown side">
-              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">radius<span class="caret"></span></button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <li><a href="#" data-value="5">5 mi</a></li>
-                <li><a href="#" data-value="10">10 mi</a></li>
-                <li><a href="#" data-value="15">15 mi</a></li>
-                <li><a href="#" data-value="20">20 mi</a></li>
-              </ul>
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="assets/images/lablocatorlogo.PNG" alt=""></a>
             </div>
-          </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="admin.html"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Admin Login</a></li>
+            </ul>
         </div>
+    </nav>
+    <div class="container">
         <div class="row">
-          <div class="col-12-lg text-center modalDivs">
-            <button id="findLab" type="button" class="btn btn-default">Submit</button>
-          </div>
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="panel panel-default" id="mapPanel">
+                    <div class="panel-heading">
+                        <h1 id="lab-title" class="panel-title"></h1>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-responsive" id="mapTable"></table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-
-
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCZ29LFbmjkpo67GRatcSUgAp5kCO4Ncso&callback=" async defer></script>
-  <script src="https://use.fontawesome.com/71ea549139.js"></script>
-  <script src="assets/javascript/jquery.auto-grow-input.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-  <script src="assets/javascript/flowtype.js"></script>
-  <script src="assets/javascript/labs.js"></script>
-  <script src="assets/javascript/script.js"></script>
+    <div id="myModal" class="modal">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img src="assets/images/lablocatorlogo.PNG" alt=""></a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="admin.html"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Admin Login</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="overlay vertical-center">
+            <div class="container modalContent">
+                <div class="row">
+                    <div class="col-12-lg text-center modalDivs">
+                        <h1 id="find">Find a lab near...</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12-lg text-center modalDivs">
+                        <input id="enterAddy" type="text" placeholder="street address, city/state, or zip">
+                        <p id="within" class="side">within...</p>
+                        <div class="dropdown side">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">radius<span class="caret"></span></button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#" data-value="5">5 mi</a></li>
+                                <li><a href="#" data-value="10">10 mi</a></li>
+                                <li><a href="#" data-value="15">15 mi</a></li>
+                                <li><a href="#" data-value="20">20 mi</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12-lg text-center modalDivs">
+                        <button id="findLab" type="button" class="btn btn-default">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCZ29LFbmjkpo67GRatcSUgAp5kCO4Ncso&callback=" async defer></script>
+    <script src="https://use.fontawesome.com/71ea549139.js"></script>
+    <script src="assets/javascript/jquery.auto-grow-input.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="assets/javascript/flowtype.js"></script>
+    <script src="assets/javascript/labs.js"></script>
+    <script src="assets/javascript/script.js"></script>
 </body>
 
 </html>
