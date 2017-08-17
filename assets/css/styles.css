@@ -18,11 +18,11 @@ body {
   margin-top: 8px;
 }
 
-/*
+
 .adminLogin {
   margin-top: 8px;
 }
-*/
+
 
 .nameDiv {
   font-size: 1.2em;
@@ -125,4 +125,84 @@ body {
   -moz-align-items: center;
   -ms-align-items: center;
   align-items: center;
+}
+
+#searchBoxAdmin {
+    margin-top: 56px;
+    width: 25%;
+}
+
+label {
+    margin-bottom: 0px;
+}
+
+.modal-header {
+    padding: 10px 10px 10px 10px;
+}
+
+.modal-title {
+    position: bottom;
+}
+
+.form-inline {
+    margin-bottom: 10px;
+}
+
+.searchDiv {
+    text-align: center;
+    padding-bottom: 48px;
+}
+
+#searchButton {
+    background-color: #888 !important;
+    margin-top: 4em;
+    color: #fff;
+}
+
+#clearButton {
+    background-color: #666 !important;
+    margin-top: 4em;
+    color: #fff;
+}
+
+#addLabButton {
+    float: right;
+    background-color: #f3323a;
+    margin-top: 4em;
+    color: #fff;
+}
+
+
+#saveLab {
+    background-color: #f3323a !important;
+    color: #fff;
+    margin-top: 20px;
+}
+
+#delete {
+    background-color: #f3323a !important;
+    color: #fff;
+    margin-top: 20px;
+}
+
+#cancelDelete {
+    margin-top: 20px;
+    color: #fff;
+    background-color: #888 !important;
+}
+
+
+#cancelAddLab {
+    margin-top: 20px;
+    color: #fff;
+    background-color: #888 !important;
+}
+
+#editLab:hover,
+#deleteLab:hover {
+    cursor: pointer;
+}
+
+.modalButtons {
+    text-align: right;
 }
