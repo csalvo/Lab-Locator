@@ -7,6 +7,9 @@ var startAddress = encodeURIComponent(userAddress);
 var radius;
 var dest = [];
 var sorted;
+// again, oject to manage state
+// ideally, this whole thing should be a big object
+
 
 //makes first modal screen initially visible
 var modal = $("#myModal");
@@ -29,7 +32,7 @@ $("#findLab").click(function() {
 })
 
 //or press enter to set address and run google maps function
-$("#enterAddy").keyup(function(){  
+$("#enterAddy").keyup(function(){
    if (event.keyCode == 13) {
    	 modal.hide();
      userAddress = $("#enterAddy").val().trim();
@@ -45,7 +48,7 @@ var config = {
   projectId: "lab-locator",
   storageBucket: "lab-locator.appspot.com",
   messagingSenderId: "609841097386"
-};
+}; // should be at top
 firebase.initializeApp(config);
 var database = firebase.database();
 
@@ -68,7 +71,9 @@ var database = firebase.database();
 //}
 
 //google maps and firebase calls
+// this whole function should probably be moved into smaller functions
 function initMap() {
+  // if(!radius) { should accomplish that
   if (radius === undefined){
     radius = 20;
   }
@@ -87,8 +92,10 @@ function initMap() {
       var destination = ["\"" + data.val().address + ", " + data.val().city + ", " + data.val().state + ", " + data.val().zip + "\""];
       //creating variables that reference values from the data snapshot that will be used to create an array of objects below
       var name = data.val().labName;
+      // for example, this could be its own function called get destination
       var address = data.val().address + ", " + data.val().city + ", " + data.val().state + " " + data.val().zip;
       var partnersAffiliate = data.val().partnersAffiliate;
+      // why save these to a variable if you can just save data.val() to a var and then call myVar.labOrders later?
       var labOrders = data.val().labOrders;
       var labAppointment = data.val().labAppointment;
       var practiceOnly = data.val().practiceOnly;
@@ -112,6 +119,7 @@ function initMap() {
           var labDistance = response.rows[0].elements[0].distance.text;
           var intLabDistance = labDistance.substr(0, labDistance.length - 3);
           console.log(labDistance);
+          // remove console logs ^
           var parsed = parseInt(intLabDistance);
           //if it is less, take the firebase data from that lab and make an array of objects
           if (parsed <= radius) {
@@ -190,3 +198,4 @@ $('body').flowtype({
 //  AIzaSyBjn7kdkVnqf_K6MfQgOJmkmdYjVXelCR4
 
 //  google static maps api key: AIzaSyA5BItXvjAHI3qHoMYig0iUMQoNcbeHGTU
+//  remove this ^

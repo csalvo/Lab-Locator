@@ -3,21 +3,26 @@ modal.css("display", "block");
 
 var username = "adam.g.wallis@gmail.com"
 var password = "password"
+// Don't hard code these, this is not secure
 
 
 $("#loginButtonAdminModal").click(function() {
     var usernameInput = $("#adminEmail").val();
     var passwordInput = $("#adminPw").val();
     console.log(usernameInput, username, password, passwordInput);
+    // don't leave console logs in source control
     if (usernameInput === username && passwordInput === password) {
+      // again, not secure, this comparison needs to happen inside firebase
         modal.hide();
     } else {
         $(".alert").alert('close');
         $(".alertAdmin").prepend('<div class="alert alert-data alert-danger" role="alert"><strong>Invalid username or password.</div>');
+        // line wrap long lines, a lot of companies want lines to be 80 columns max.
     }
 });
 
 $("#adminPw").keyup(function() {
+  // If you made your html a form with a submit button and you used e.preventDefualt(), then you wouldn't have to listen to keyup
     if (event.keyCode == 13) {
     var usernameInput = $("#adminEmail").val();
     var passwordInput = $("#adminPw").val();
@@ -28,9 +33,11 @@ $("#adminPw").keyup(function() {
         $(".alert").alert('close');
         $(".alertAdmin").prepend('<div class="alert alert-data alert-danger" role="alert"><strong>Invalid username or password.</div>');
     }
+    // this is the same as the function above, create 1 function that does this and call it twice.
 }
 });
 
+// You should generally place these at the top of the file.
 var config = {
     apiKey: "AIzaSyBp0NeXcn_s0KN5Fk5GzKFrVUROXVPfwFY",
     authDomain: "lab-locator.firebaseapp.com",
@@ -44,6 +51,8 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var ref = database.ref("labList");
 var editing = false;
+// if you are going to manage state globally, use a state object (yes, really) instead of just a variable.
+// that way you can pass these through your functions
 
 loadLabs();
 
@@ -55,7 +64,17 @@ $("#addLabButton").on("click", function() {
 
 $("#saveLab").on("click", function() {
     getLabDataFromTextInputs();
+    // you could just say if(!labName || !labAddress1 .. since an empty string will return false
     if (labName === "" || labAddress1 === "" || labCity === "" || labState === "" || labZip === "") {
+      // should really check all these individually you could do this like...
+      //
+      // var erorrs = [];
+      // var fields = ["labName", "labAddress"]
+      // for(var i=0; i<fields.length; i<l; i++) {
+      //   if(!fields[i]) { errors.piush(fields[i]) }
+      // }
+      //
+      // then in your form validation function, you can display errors for just that field(s)
         formValidation();
     } else {
         if (editing) {
@@ -79,6 +98,7 @@ $("#cancelAddLab").on("click", function() {
 
 $("#searchBoxAdmin").keyup(function() {
     if (event.keyCode == 13) {
+      // Again, you generally don't want to listen to certain keycodes for enter
         var searchFor = $("#searchBoxAdmin").val();
         if (searchFor != "") {
             searchLabs(searchFor);
@@ -155,7 +175,7 @@ function searchLabs(searchTerm) {
 
     $(".panel-title").text("Labs containing '" + searchTerm + "'");
 
-    if (currentSearch.length > 0) {
+    if (currentSearch.length > 0) {  // this is not nessecary, the loop won't run if currentSearch = 0
         for (var i = 0; i < currentSearch.length; i++) {
             row = '<tr><td>' + currentSearch[i].labName + '</td><td>' + currentSearch[i].address + ", " +
                 currentSearch[i].city + ", " + currentSearch[i].state + ", " + currentSearch[i].zip + '</td><td>' +
@@ -206,6 +226,7 @@ function addNewLab() {
         phone: labPhone,
         fax: labFax
     }
+    // sweet object you've got there
     ref.push(newLab, function(error) {
         if (error)
             $("#search").prepend('<div class="alert alert-danger" role="alert"><strong>Your lab was not saved.</div>');
@@ -218,11 +239,12 @@ function addNewLab() {
 
     });
 
-    //double click prevention in case the db is slow 
+    //double click prevention in case the db is slow
     $("#saveLab").prop('disabled', true);
 }
 
 function clearModalInfo() {
+  // You could use a loop and an array here to avoid repeating all this
     $("#lab-name-input").val("");
     $("#address-input").val("");
     $("#city-input").val("");
@@ -248,6 +270,9 @@ function deleteRow(r) {
     document.getElementById("lab-table").deleteRow(i);
 }
 
+// Your application should pass around varaibles as arguments through functions, not
+// call references to outside varaibles
+// this works as a closure and is a feature of javascript, but its not a good design pattern
 function getLabDataFromTextInputs() {
     labName = $("#lab-name-input").val();
     labAddress1 = $("#address-input").val();
@@ -294,6 +319,7 @@ function saveEditedLabData(id) {
         phone: labPhone,
         fax: labFax
     }
+    // nice object
 
     database.ref("labList/" + id).update(editedLab, function(error) {
         if (error)
@@ -318,7 +344,9 @@ function displayEditedLabData(id) {
 }
 
 function formValidation() {
+  // you can select multiple #ids within one jquery selector by using commas
     $("#lab-name-label").css("color", "red");
+    // Again, not nessecarily an error on every field
     $("#lab-address-label").css("color", "red");
     $("#lab-city-label").css("color", "red");
     $("#lab-state-label").css("color", "red");
